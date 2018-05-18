@@ -3,8 +3,6 @@ $nik = isset($_GET['nik'])?$_GET['nik']:'';
 if ($nik!="") {
 	$data=$base->select("user where nik='$nik'");
 	$q=$data->fetch();
-
-		// print_r($q['nik']);
 }
 ?>
 
@@ -24,13 +22,7 @@ if ($nik!="") {
 				Email
 			</label>
 			<input type="mail" name="email" class="form-control" placeholder="Example@mail.com" value="<?=$q['email']?>" required>
-		</div><br><!-- 
-		<div class="col-md-6">
-			<label for="password">
-				Password
-			</label>
-			<input type="password" name="password" class="form-control" placeholder="Password" value="<?=$password?>" required>
-		</div><br> -->
+		</div><br>
 		<div class="col-md-11">
 			<label for="alamat">
 				Address
@@ -49,16 +41,6 @@ if ($nik!="") {
 			</label>
 			<select class="form-control" name="gender" required>
 				<?php
-				// $data = $base->select("");
-				// if ($q[gender]==null) {
-				// 	while ($row=$data->fetch()) {
-				// 		echo "<option value='$row[id]'>$row[gender]</option>";
-				// 	}
-				// }else{
-				// 	while ($row=$data->fetch()) {
-				// 		echo "<option value='$q[gender]'>$row[gender]</option>";
-				// 	}
-				// }
 				$data = $base->select("gender");
 					while ($value = $data->fetch()) {
 						echo "<option value='$value[id]'>$value[gender]</option>";
@@ -69,6 +51,54 @@ if ($nik!="") {
 					}
 				?>
 			</select>
+		</div><br>
+		
+		<div class="col-md-7">
+			<label>
+				TTL
+			</label>
+			<input type="text" name="tmp_lahir" class="form-control" placeholder="Tempat Lahir" value="<?=$q['tmp_lahir']?>" required>
+			<input type="date" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir" value="<?=$q['tgl_lahir']?>" required>
+		</div><br>
+		<div class="col-md-4">
+			<label for="agama">
+				Agama
+			</label>
+			<select class="form-control" name="agama" required>
+				<?php
+				$data = $base->select("agama");
+				while ($row=$data->fetch()) {
+					echo "<option value='$row[id]'>$row[agama]</option>";
+				}
+				$d = $base->select("agama where id = '$q[agama]'");
+				while ($v = $d->fetch()) {
+					echo "<option value='$v[id]'>$v[agama]</option>";
+				}
+				?>
+			</select>
+		</div><br>
+		<div class="col-md-2">
+			<label for="sts_perkawinan">
+				Status Perkawinan
+			</label>
+			<select class="form-control" name="sts_perkawinan" required>
+				<?php
+				$data = $base->select("sts_perkawinan");
+				while ($row=$data->fetch()) {
+					echo "<option value='$row[id]'>$row[nama]</option>";
+				}
+				$d = $base->select("sts_perkawinan where id = '$q[sts_perkawinan]'");
+				while ($v = $d->fetch()) {
+					echo "<option value='$v[id]'>$v[nama]</option>";
+				}
+				?>
+			</select>
+		</div><br>
+		<div class="col-md-7">
+			<label for="pekerjaan">
+				Pekerjaan
+			</label>
+			<input type="text" name="pekerjaan" class="form-control" placeholder="Pekerjaan" value="<?=$q['pekerjaan']?>" required>
 		</div><br>
 		<div class="col-md-2">
 			<label for="level">

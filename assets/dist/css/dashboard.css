@@ -149,3 +149,14 @@ body {
   color: #10314e;
   text-decoration: none;
 }
+
+.isDisabled{
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+a[aria-disabled="true"]{
+  display: inline-block;
+  pointer-events: none;
+  text-decoration: none;
+}

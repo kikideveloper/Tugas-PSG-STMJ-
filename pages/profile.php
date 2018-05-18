@@ -9,47 +9,79 @@
 	</form>
 </div>
 <br>
-<div class="table-responsive">
-	<table class="table table-hover table-stiped">
-		<thead>
-			<tr>
-				<th scope="col">No</th>
-				<th scope="col">NIK</th>
-				<th scope="col">Name</th>
-				<th scope="col">Email</th>
-				<th scope="col">Gender</th>
-				<!-- <th scope="col">Address</th> -->
-				<!-- <th scope="col">Phone</th> -->
-				<th scope="col">Level</th>
-			</tr>
-		</thead>
 		<?php
 		$post = $base->sant(INPUT_POST);
 		if ($post!="") {
 			extract($post);
-			$res = $base->select("user u, level l, gender g where u.nik LIKE '%$search%' and u.level=l.id and u.gender=g.id and u.level='5' and status = 'active'","u.nik, u.name, u.email, g.gender as gender, u.alamat, u.phone, l.name as level");
-		}else{
-			$res = $base->select("user u, level l, gender g where u.level=l.id and u.gender=g.id and u.level='5' and status = 'active'","u.nik, u.name, u.email, g.gender as gender, u.alamat, u.phone, l.name as level");
-		}
+			$res = $base->select("user u, level l, gender g, agama a, sts_perkawinan s where u.nik LIKE '%$search%' and u.level=l.id and u.gender=g.id and u.agama=a.id and u.sts_perkawinan=s.id and u.level='5' and status = 'active'","u.nik, u.name, u.email, g.gender as gender, u.notif, u.tmp_lahir, u.tgl_lahir, a.agama, s.nama as status , u.pekerjaan, u.alamat, u.phone, l.name as level");?>
+
+<div class="table-responsive">
+	<div class="col-md-6">		
+		<table class="table table-hover table-stiped">
+		<?php
 		$no=1;
 		while ($data = $res->fetch()) {
 			?>
-			<tbody>
 				<tr>
-					<th scope="row"><?=$no?></th>
+				<th scope="col">NIK</th>
+					<td> : </td>
 					<td><?=$data['nik']?></td>
+				</tr>
+				<tr>
+					<th scope="col">Name</th>
+					<td> : </td>
 					<td><?=$data["name"]?></td>
+				</tr>
+				<tr>
+				<th scope="col">Email</th>
+					<td> : </td>
 					<td><?=$data['email']?></td>
+				</tr>
+				<tr>
+					<th scope="col">Tempat Tanggal Lahir</th>
+					<td> : </td>
+					<td><?=$data["tmp_lahir"].",".$data["tgl_lahir"]?></th>
+				</tr>
+				<tr>
+				<th scope="col">Gender</th>
+					<td> : </td>
 					<td><?=$data['gender']?></td>
-					<!-- <td><?//=$data['alamat']?></td> -->
-					<!-- <td><?//=$data['phone']?></td> -->
+				</tr>
+		</table>
+	</div>
+	<div class="col-md-6">
+		<table class="table table-hover table-stiped">
+				
+				<tr>
+				<th scope="col">Level</th>
+					<td> : </td>
 					<td><?=$data['level']?></td>
 				</tr>
-			</tbody>
+				<tr>
+				<th scope="col">Agama</th>
+					<td> : </td>
+					<td><?=$data['agama']?></td>
+				</tr>
+				<tr>
+				<th scope="col">Status Perkawinan</th>
+					<td> : </td>
+					<td><?=$data['status']?></td>
+				</tr>
+				<tr>
+				<th scope="col">Pekerjaan</th>
+					<td> : </td>
+					<td><?=$data['pekerjaan']?></td>
+				</tr>
+				<tr>
+					<th scope="col">Pemberitahuan</th>
+					<td> : </td>
+					<td><?=$data['notif']?></td>
+				</tr>
 			<?php
 			$no++;
-			// print_r($data);
+			}
 		}
 		?>
-	</table>
+		</table>
+	</div>
 </div>

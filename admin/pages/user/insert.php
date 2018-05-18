@@ -50,6 +50,47 @@
 				?>
 			</select>
 		</div><br>
+		<div class="col-md-7">
+			<label>
+				TTL
+			</label>
+			<input type="text" name="tmp_lahir" class="form-control" placeholder="Tempat Lahir" required>
+			<input type="date" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir" required>
+		</div><br>
+		<div class="col-md-4">
+			<label for="agama">
+				Agama
+			</label>
+			<select class="form-control" name="agama" required>
+				<?php
+				echo "<option value='0'>-</option>";
+				$data = $base->select("agama");
+				while ($row=$data->fetch()) {
+					echo "<option value='$row[id]'>$row[agama]</option>";
+				}
+				?>
+			</select>
+		</div><br>
+		<div class="col-md-2">
+			<label for="sts_perkawinan">
+				Status Perkawinan
+			</label>
+			<select class="form-control" name="sts_perkawinan" required>
+				<?php
+				echo "<option value='0'>-</option>";
+				$data = $base->select("sts_perkawinan");
+				while ($row=$data->fetch()) {
+					echo "<option value='$row[id]'>$row[nama]</option>";
+				}
+				?>
+			</select>
+		</div><br>
+		<div class="col-md-7">
+			<label for="pekerjaan">
+				Pekerjaan
+			</label>
+			<input type="text" name="pekerjaan" class="form-control" placeholder="Pekerjaan" required>
+		</div><br>
 		<div class="col-md-2">
 			<label for="level">
 				Level

@@ -1,13 +1,18 @@
 <?php 
-
+// class fungsi untuk perintah koneksi dan sql
 class Query
 {
+	// set variable db yang tidak bisadi akses oleh class lainya atau Database Handler
 	private $db;
 
+	// fungsi yang langsung di jalankan adalah fungsi koneksi 
 	function __construct()
 	{
+		// mengecek koneksi
 		try {
+			// set variable db dengan isi perintah pdo
 			$this->db=new PDO("mysql:host=127.0.0.1;dbname=bima","root","");
+			// 
 			$this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
 			die($e->getMessage());
@@ -25,6 +30,8 @@ class Query
 		}
 		return $data;
 	}
+
+	
 	public function select($tab,$value='*')
 	{
 		try {
@@ -35,6 +42,7 @@ class Query
 		}
 		return $data;
 	}
+	
 	public function insert($tab,$value)
 	{
 		try {
@@ -44,6 +52,8 @@ class Query
 			die($e->getMessage());
 		}
 	}
+	
+
 	public function update($tab,$value)
 	{
 		try {
@@ -53,6 +63,7 @@ class Query
 			die($e->getMessage());
 		}
 	}
+	
 	public function del($value)
 	{
 		try {
@@ -62,6 +73,7 @@ class Query
 			die($e->getMessage());
 		}
 	}
+	
 	public function lastId($value)
 	{
 		try {
@@ -70,14 +82,17 @@ class Query
 			die($e->getMessage());
 		}
 	}
+	
 	public function row($value)
 	{
 		return $data=$value->rowCount();
 	}
+	
 	public function sant($value)
 	{
 		return $data=filter_input_array($value,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 	}
+	
 	public function random($length=10)
 	{
 		$string='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
